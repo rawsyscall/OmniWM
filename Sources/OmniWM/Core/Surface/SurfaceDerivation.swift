@@ -90,6 +90,7 @@ enum SurfaceDerivation {
         guard world.systemModalFocusToken != token else { return nil }
         let picture = world.edgePicturePresentation(for: entry)
         guard world.suppressedFocusToken != token,
+              world.borderHiddenForDragToken != token,
               !world.hasPendingNativeFullscreenTransition(in: entry.workspaceId),
               !world.isWindowFullscreenInLayout(entry),
               picture != nil || world.isManagedWindowDisplayable(entry),

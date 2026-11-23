@@ -85,6 +85,7 @@ extension MouseEventHandler {
         }
         guard controller != nil, !isCarryingWindowByGesture else { return false }
         controller?.noteUserAction()
+        controller?.surfaceReconciler.noteBorderPointerPressed()
         if button == .left {
             state.leftPressLocation = location
             state.leftPressModifiers = modifiers
@@ -135,6 +136,7 @@ extension MouseEventHandler {
     }
 
     func dispatchMouseUp(at location: CGPoint, button: MouseButton = .left) {
+        controller?.surfaceReconciler.noteBorderPointerReleased()
         if button == .left, !isCarryingWindowByGesture {
             releaseEdgeResizeHold()
         }

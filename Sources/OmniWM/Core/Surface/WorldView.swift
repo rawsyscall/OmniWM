@@ -37,6 +37,10 @@ struct WorldView {
         controller.workspaceManager.suppressedFocusToken
     }
 
+    var borderHiddenForDragToken: WindowToken? {
+        controller.surfaceReconciler.borderDrag.hiddenToken
+    }
+
     var systemModalFocusToken: WindowToken? {
         controller.workspaceManager.systemModalFocusToken
     }

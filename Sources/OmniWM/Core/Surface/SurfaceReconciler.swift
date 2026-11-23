@@ -32,6 +32,10 @@ final class SurfaceReconciler {
     private let isWindowBelow: @MainActor (CGWindowID, CGWindowID) -> Bool
     let nativeFullscreenState = NativeFullscreenSurfaceState()
     private(set) var appliedScene = DesiredSurfaceScene.empty
+    var borderDrag = BorderDragState()
+    var borderDragBounds: @MainActor (WMController, Int) -> CGRect? = { controller, windowId in
+        WorldView(controller: controller).observedWindowBounds(windowId: windowId)
+    }
 
     func nativeFullscreenDiagnosticsSnapshot() -> FullscreenSurfaceDiagnosticsSnapshot {
         nativeFullscreenState.diagnostics(applied: appliedScene.placeholders, controller: controller)
@@ -117,6 +121,11 @@ final class SurfaceReconciler {
         case .fullScene:
             runFullReconcile(forceOrdering: forceOrdering)
         }
+    }
+
+    /// Puts the border in the same pass as the window-server move event, not a run-loop turn behind it.
+    func reconcileBorderNow() {
+        runBorderReconcile(forceOrdering: false)
     }
 
     func reconcileAnimationTick() {

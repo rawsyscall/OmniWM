@@ -36,6 +36,9 @@ extension AXEventHandler {
         {
             return
         }
+        if let borderToken = controller.workspaceManager.borderFocusToken, borderToken.windowId == Int(windowId) {
+            controller.surfaceReconciler.noteBorderWindowFrameChanged(borderToken)
+        }
         if controller.mouseEventHandler.tracksNativeTitleBarDrag(windowId: Int(windowId)) {
             cancelFrameObservation(windowId: windowId)
             applyFrameChange(
