@@ -37,10 +37,6 @@ struct WorldView {
         controller.workspaceManager.suppressedFocusToken
     }
 
-    var borderHiddenForDragToken: WindowToken? {
-        controller.surfaceReconciler.borderDrag.hiddenToken
-    }
-
     var systemModalFocusToken: WindowToken? {
         controller.workspaceManager.systemModalFocusToken
     }
@@ -293,6 +289,9 @@ struct WorldView {
     }
 
     func borderFrame(for entry: WindowState) -> CGRect? {
+        if let carried = controller.surfaceReconciler.borderDragFrame(for: entry.token) {
+            return carried
+        }
         if let observed = observedWindowBounds(windowId: entry.windowId) {
             return observed
         }

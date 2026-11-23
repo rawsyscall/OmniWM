@@ -427,6 +427,7 @@ extension MouseEventHandler {
             return
         }
         guard !isCarryingWindowByGesture else { return }
+        controller?.surfaceReconciler.noteBorderPointerDragged(to: location, button: button)
         warpDraggedPointer(at: location)
         controller?.workspaceBarManager.handleAutoHideMouseMoved(at: location)
         confirmNativeMouseDrag(at: location, button: button)
