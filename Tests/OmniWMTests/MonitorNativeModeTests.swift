@@ -195,6 +195,40 @@ final class MonitorNativeModeTests: XCTestCase {
         XCTAssertFalse(settings.monitors.isNativeMode(fixture.tiling))
     }
 
+    func testRuleReevaluationKeepsANativeWindowFloatingInsteadOfFlashingItIntoTheLayout() throws {
+        let fixture = try makeFixture(nativeByDefault: true)
+        let controller = fixture.controller
+        let manager = controller.workspaceManager
+        let token = manager.addWindow(axRef(7_351, 51), pid: 7_351, windowId: 51, to: fixture.nativeWorkspace)
+        controller.syncNativeModeWindows()
+        let entry = try XCTUnwrap(manager.entry(for: token))
+        XCTAssertEqual(entry.mode, .floating)
+
+        for context in [WindowRuleReevaluationContext.automatic, .explicitRuleApply] {
+            XCTAssertEqual(
+                controller.trackedModePreservingAutomaticFallbackState(
+                    decision: Self.tileDecision, existingEntry: entry, context: context
+                ),
+                .floating
+            )
+        }
+
+        controller.setNativeMode(false, for: fixture.native)
+        XCTAssertEqual(manager.entry(for: token)?.mode, .tiling, "native mode still owns the window it kept floating")
+    }
+
+    private static let tileDecision = WindowDecision(
+        disposition: .managed,
+        source: .heuristic,
+        layoutDecisionKind: .fallbackLayout,
+        workspaceName: nil,
+        ruleEffects: .none,
+        admissionHints: .none,
+        ruleProvenance: .none,
+        heuristicReasons: [],
+        deferredReason: nil
+    )
+
     private static let floatRuleDecision = WindowDecision(
         disposition: .floating,
         source: .userRule(UUID()),

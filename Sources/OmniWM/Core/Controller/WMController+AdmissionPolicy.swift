@@ -121,6 +121,9 @@ extension WMController {
         ) else {
             return nil
         }
+        if let existingEntry, nativeModeKeepsFloating(existingEntry, decidedMode: trackedMode) {
+            return .floating
+        }
 
         guard context == .automatic,
               let existingEntry,

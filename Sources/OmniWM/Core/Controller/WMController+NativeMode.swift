@@ -79,6 +79,18 @@ extension WMController {
         )
     }
 
+    /// Re-evaluation recomputes a window's baseline mode, which tiles most windows. On a native monitor that
+    /// would flash the window into the layout (at the layout's frame, even mid-drag) before native mode floats
+    /// it again, so a floating window there keeps floating and native mode owns it.
+    func nativeModeKeepsFloating(_ entry: WindowState, decidedMode: TrackedWindowMode) -> Bool {
+        guard entry.mode == .floating, decidedMode == .tiling,
+              workspaceManager.manualLayoutOverride(for: entry.token) != .forceTile,
+              let monitor = workspaceManager.monitor(for: entry.workspaceId), isNativeMode(monitor)
+        else { return false }
+        nativeModeFloatedTokens.insert(entry.token)
+        return true
+    }
+
     /// A window that its own rule or override now floats no longer belongs to native mode,
     /// so leaving the native monitor must keep it floating instead of retiling it.
     func releaseNativeModeOwnership(of token: WindowToken, ifBaselineFloats decision: WindowDecision) {
