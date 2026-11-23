@@ -16,8 +16,11 @@ struct BorderDragState: Equatable {
     var lastFrame: CGRect?
     /// Set once the window server shows the window moving with the pointer, not resizing or sitting still.
     var isFollowingPointer = false
-    /// Window-server reports in a row that disagreed with the pointer; two end following for this drag.
-    var drifts = 0
+    /// How far the last window-server report sat from the prediction, while waiting for a second to confirm it.
+    var pendingShift: CGVector?
+    /// The window stopped tracking the pointer (held at a display edge); the window server places the border.
+    var isSuspended = false
+    /// A resize: the pointer cannot predict it, so the window server places the border for the rest of the drag.
     var gaveUp = false
 }
 
@@ -43,7 +46,7 @@ extension SurfaceReconciler {
     func noteBorderPointerDragged(to location: CGPoint, button: MouseEventHandler.MouseButton) {
         guard borderDrag.button == button else { return }
         borderDrag.pointer = location
-        guard borderDrag.isFollowingPointer, let controller, let windowId = borderDrag.windowId,
+        guard borderDrag.isFollowingPointer, !borderDrag.isSuspended, let controller, let windowId = borderDrag.windowId,
               let token = controller.workspaceManager.borderFocusToken, token.windowId == windowId
         else { return }
         // A window that stopped sends no more move reports, so the pointer alone could pull the border away.
@@ -52,8 +55,7 @@ extension SurfaceReconciler {
         if let predicted = borderDragFrame(for: token), let frame,
            abs(frame.minX - predicted.minX) > 48 || abs(frame.minY - predicted.minY) > 48
         {
-            borderDrag.isFollowingPointer = false
-            borderDrag.gaveUp = true
+            borderDrag.isSuspended = true
         }
         reconcileBorderNow()
     }
@@ -71,9 +73,13 @@ extension SurfaceReconciler {
 
     /// Where the border goes while the pointer carries its window, or nil to use the window server's bounds.
     func borderDragFrame(for token: WindowToken) -> CGRect? {
-        guard borderDrag.isFollowingPointer, borderDrag.windowId == token.windowId,
-              let start = borderDrag.location, let pressFrame = borderDrag.pressFrame
+        guard borderDrag.isFollowingPointer, !borderDrag.isSuspended, borderDrag.windowId == token.windowId
         else { return nil }
+        return pointerPredictedFrame()
+    }
+
+    private func pointerPredictedFrame() -> CGRect? {
+        guard let start = borderDrag.location, let pressFrame = borderDrag.pressFrame else { return nil }
         let pointer = borderDrag.pointer ?? start
         var frame = pressFrame.offsetBy(dx: pointer.x - start.x, dy: pointer.y - start.y)
         // The window server stops a title bar from rising under the menu bar of the display under the pointer,
@@ -132,17 +138,24 @@ extension SurfaceReconciler {
             }
             return
         }
-        // macOS or the app held the window back (screen edges, snapping): the pointer no longer predicts it.
-        guard let predicted = borderDragFrame(for: token),
-              abs(frame.minX - predicted.minX) > 12 || abs(frame.minY - predicted.minY) > 12
-        else {
-            borderDrag.drifts = 0
+        // macOS holds a window at display edges, after which it rides at a new distance from the pointer:
+        // the window server places the border while the gap changes, and two matching reports re-anchor it.
+        guard let predicted = pointerPredictedFrame() else { return }
+        let shift = CGVector(dx: frame.minX - predicted.minX, dy: frame.minY - predicted.minY)
+        guard abs(shift.dx) > 3 || abs(shift.dy) > 3 else {
+            borderDrag.pendingShift = nil
+            borderDrag.isSuspended = false
             return
         }
-        borderDrag.drifts += 1
-        if borderDrag.drifts >= 2 {
-            borderDrag.isFollowingPointer = false
-            borderDrag.gaveUp = true
+        if let pending = borderDrag.pendingShift, abs(shift.dx - pending.dx) <= 3, abs(shift.dy - pending.dy) <= 3,
+           let start = borderDrag.location
+        {
+            borderDrag.location = CGPoint(x: start.x - shift.dx, y: start.y - shift.dy)
+            borderDrag.pendingShift = nil
+            borderDrag.isSuspended = false
+        } else {
+            borderDrag.pendingShift = shift
+            borderDrag.isSuspended = true
         }
     }
 }
