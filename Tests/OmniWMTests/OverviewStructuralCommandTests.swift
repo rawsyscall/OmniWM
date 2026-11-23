@@ -1496,6 +1496,7 @@ final class OverviewStructuralCommandTests: XCTestCase {
             ),
             autosaveEnabled: false
         )
+        settings.monitors.nativeModeByDefault = false // These fixtures exercise tiling.
         settings.animationsEnabled = false
         settings.workspaces.configurations = layouts.enumerated().map { index, layout in
             WorkspaceConfiguration(name: String(index + 1), monitorAssignment: .main, layoutType: layout)

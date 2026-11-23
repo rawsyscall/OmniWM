@@ -44,6 +44,8 @@ final class IPCCommandRouter {
             return controller.commandHandler.performCommand(.toggleFloatingFocus)
         case .rescueOffscreenWindows:
             return rescueOffscreenWindows()
+        case .toggleMonitorNativeMode:
+            return controller.commandHandler.performCommand(.toggleMonitorNativeMode)
         case let .workspaceLayout(command):
             return handle(command)
         case let .fullscreen(command):

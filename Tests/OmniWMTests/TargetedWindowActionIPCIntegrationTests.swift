@@ -1330,6 +1330,7 @@ final class TargetedWindowActionIPCIntegrationTests: XCTestCase {
             ),
             autosaveEnabled: false
         )
+        settings.monitors.nativeModeByDefault = false // These fixtures exercise tiling.
         settings.animationsEnabled = false
         settings.workspaces.defaultLayoutType = .niri
         settings.workspaces.configurations = [

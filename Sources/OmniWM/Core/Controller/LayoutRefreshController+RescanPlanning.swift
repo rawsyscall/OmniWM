@@ -87,6 +87,7 @@ extension LayoutRefreshController {
         )
 
         reconcileFullRescanBindings(context: mutationContext)
+        controller.syncNativeModeWindows()
 
         try Task.checkCancellation()
 

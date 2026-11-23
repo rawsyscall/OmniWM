@@ -169,7 +169,7 @@ extension TOMLNode {
         if isMonitorIdentityArray(arrayPath), hasMonitorIdentity(schemaKnown) {
             return classified(monitorMatchingIndices(for: schemaKnown, in: nodes), empty: .deleted)
         }
-        if arrayPath == "monitors.ranking" {
+        if ["monitors.ranking", "monitors.nativeMode", "monitors.tiling"].contains(arrayPath) {
             return classified(rankingMatchingIndices(for: schemaKnown, in: nodes), empty: .deleted)
         }
         let matches = matchingIndices(in: nodes) { candidate in

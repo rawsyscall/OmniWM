@@ -73,6 +73,7 @@ window-switcher
 raise-all-floating-windows
 toggle-floating-focus
 rescue-offscreen-windows
+toggle-monitor-native-mode
 toggle-workspace-layout
 set-workspace-layout
 toggle-fullscreen

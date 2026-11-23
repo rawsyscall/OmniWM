@@ -32,6 +32,13 @@ extension ActionCatalog {
                 binding: .unassigned,
                 keywords: ["rescue", "offscreen", "off-screen"]
             ),
+            action(
+                id: "toggleMonitorNativeMode",
+                command: .toggleMonitorNativeMode,
+                category: .layout,
+                binding: KeyBinding(keyCode: UInt32(kVK_ANSI_N), modifiers: UInt32(optionKey | shiftKey)),
+                keywords: ["native", "macos", "floating", "monitor", "display", "tiling"]
+            ),
             IPCWindowStateCommand.toggleFloating.actionSpec(),
             IPCWindowStateCommand.close.actionSpec(),
             action(

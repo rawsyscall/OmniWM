@@ -208,6 +208,7 @@ extension IPCJSONWriter {
              .raiseAllFloatingWindows,
              .toggleFloatingFocus,
              .rescueOffscreenWindows,
+             .toggleMonitorNativeMode,
              .fullscreen,
              .presentation,
              .media,

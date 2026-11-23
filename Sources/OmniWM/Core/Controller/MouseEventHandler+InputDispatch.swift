@@ -152,6 +152,7 @@ extension MouseEventHandler {
         if button == .left {
             endCarriedWindowMove(at: location)
             runDeferredClickScroll()
+            controller?.syncNativeModeWindows(leftButtonReleased: true)
         }
         if !isCapturedInteraction(button), shouldBlockOwnWindowInput(at: location) {
             cancelActiveMouseInteraction()

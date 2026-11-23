@@ -120,11 +120,14 @@ For no saved arrangements, use `arrangements = []` inside `[routing]` and omit t
 
 ## monitors
 
-Optional table that ranks displays for OmniWM's monitor roles. Omit it to keep the default roles: **Main** is the display with the macOS menu bar, and **Secondary** and **Tertiary** are the next displays in arrangement order.
+Optional table that ranks displays for OmniWM's monitor roles and chooses which displays use native macOS mode. Omit it to keep the default roles: **Main** is the display with the macOS menu bar, and **Secondary** and **Tertiary** are the next displays in arrangement order.
 
 | Key | Type | Default | Description |
 | --- | --- | --- | --- |
 | `ranking` | array of tables | unset | Displays in preference order, written as `[[monitors.ranking]]` rows. The highest-ranked connected display is Main, the next connected one is Secondary, the third is Tertiary, and unranked displays follow in the default order. |
+| `nativeModeByDefault` | bool | `true` | Whether displays without their own choice start in native macOS mode. OmniWM does not tile on a native display: every window floats and can be moved and resized freely. Set it to `false` to tile by default (**Native macOS Mode by Default** in **Settings > Displays**). |
+| `nativeMode` | array of tables | unset | Displays that always use native macOS mode, written as `[[monitors.nativeMode]]` rows with the same identity fields as `ranking`. |
+| `tiling` | array of tables | unset | Displays that always tile, written as `[[monitors.tiling]]` rows with the same identity fields as `ranking`. |
 
 Each row requires `name`; `displayUUID` and `displayId` are optional identity fields that Settings records automatically. A row with a `displayUUID` matches only that display. A row without one falls back to the display-ID/name pair, and then to a case-insensitive name match when it identifies exactly one connected display. A row whose display is disconnected is skipped, so a docked external display can outrank the built-in display while the built-in display becomes Main again when undocked.
 
@@ -139,6 +142,17 @@ name = "Built-in Retina Display"
 ```
 
 Workspaces whose home is Main, Secondary, or Tertiary follow this ranking, and so does the Quake terminal's `mainMonitor` mode. The `is-main` field and selector in `omniwmctl` keep reporting the macOS main display.
+
+A display's own `nativeMode` or `tiling` row wins over `nativeModeByDefault`; a row matches by `displayUUID` when it has one, and otherwise by the `displayId`/`name` pair. **Toggle Native macOS Mode on Monitor** (default `Option+Shift+N`, or `omniwmctl command toggle-monitor-native-mode`; both act on the display under interaction), the **NATIVE MACOS MODE** rows in the menu bar menu, and **Native macOS Mode** in **Settings > Displays** record that choice. A window that native mode floated is tiled again when it moves to a tiling display or its display starts tiling.
+
+```toml
+[monitors]
+nativeModeByDefault = false
+
+[[monitors.nativeMode]]
+displayUUID = "8D575171-D0DD-43BB-9FEF-356E6B7C917D"
+name = "Built-in Retina Display"
+```
 
 ## gaps
 

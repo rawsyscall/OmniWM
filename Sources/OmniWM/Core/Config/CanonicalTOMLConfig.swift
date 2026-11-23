@@ -58,10 +58,23 @@ struct CanonicalTOMLConfig: Codable, Equatable {
 
     struct Monitors: Codable, Equatable {
         var ranking: [OutputId]
+        var nativeModeByDefault: Bool?
+        var nativeMode: [OutputId]?
+        var tiling: [OutputId]?
     }
 
     struct Appearance: Codable, Equatable {
         var tabRailAppIcons: Bool
+    }
+}
+
+extension CanonicalTOMLConfig.Monitors {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        ranking = try container.decodeIfPresent([OutputId].self, forKey: .ranking) ?? []
+        nativeModeByDefault = try container.decodeIfPresent(Bool.self, forKey: .nativeModeByDefault)
+        nativeMode = try container.decodeIfPresent([OutputId].self, forKey: .nativeMode)
+        tiling = try container.decodeIfPresent([OutputId].self, forKey: .tiling)
     }
 }
 
@@ -150,7 +163,13 @@ extension CanonicalTOMLConfig {
         focus.edgeNavigationInterval = FocusSettings.normalizedEdgeNavigationInterval(focus.edgeNavigationInterval)
         mouseWarp = export.mouseWarp
         routing = export.routing
-        monitors = export.monitorRanking.isEmpty ? nil : Monitors(ranking: export.monitorRanking)
+        let monitors = Monitors(
+            ranking: export.monitorRanking,
+            nativeModeByDefault: export.nativeModeByDefault ? nil : false,
+            nativeMode: export.nativeModeMonitors.isEmpty ? nil : export.nativeModeMonitors,
+            tiling: export.tilingMonitors.isEmpty ? nil : export.tilingMonitors
+        )
+        self.monitors = monitors == Monitors(ranking: []) ? nil : monitors
         gaps = export.gaps
         niri = export.niri
         dwindle = export.dwindle
@@ -189,6 +208,9 @@ extension CanonicalTOMLConfig {
             mouseWarp: mouseWarp,
             routing: routing,
             monitorRanking: monitors?.ranking ?? [],
+            nativeModeByDefault: monitors?.nativeModeByDefault ?? true,
+            nativeModeMonitors: monitors?.nativeMode ?? [],
+            tilingMonitors: monitors?.tiling ?? [],
             gaps: gaps,
             niri: niri,
             workspaceConfigurations: workspaces,

@@ -286,6 +286,7 @@ final class OverviewViewportCommitTests: XCTestCase {
             runtimeState: RuntimeStateStore(directory: directory.appendingPathComponent("state"), deferSaves: false),
             autosaveEnabled: false
         )
+        settings.monitors.nativeModeByDefault = false // These fixtures exercise tiling.
         let controller = WMController(settings: settings, windowFocusOperations: WindowFocusOperations(
             activateApp: { _ in }, focusSpecificWindow: { _, _, _ in }, raiseWindow: { _ in }
         ))

@@ -407,6 +407,10 @@ extension IPCAutomationManifest {
             summary: "Clamp tracked floating windows back onto their visible monitors."
         ),
         .init(
+            name: .toggleMonitorNativeMode,
+            summary: "Toggle native macOS mode, where every window floats, on the interaction monitor."
+        ),
+        .init(
             name: .windowState(.toggleFloating),
             summary: "Toggle the focused managed window between tiled and floating."
         ),

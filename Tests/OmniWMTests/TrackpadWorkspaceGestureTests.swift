@@ -809,7 +809,7 @@ final class TrackpadWorkspaceGestureTests: XCTestCase {
     private func makeSettings() -> SettingsStore {
         let root = FileManager.default.temporaryDirectory
             .appendingPathComponent("TrackpadWorkspaceGestureTests-\(UUID().uuidString)", isDirectory: true)
-        return SettingsStore(
+        let settings = SettingsStore(
             persistence: SettingsFilePersistence(
                 directory: root.appendingPathComponent("config", isDirectory: true),
                 startWatching: false,
@@ -821,6 +821,8 @@ final class TrackpadWorkspaceGestureTests: XCTestCase {
             ),
             autosaveEnabled: false
         )
+        settings.monitors.nativeModeByDefault = false // These fixtures exercise tiling.
+        return settings
     }
 
     private func makeFixture(

@@ -198,6 +198,7 @@ Workspace IDs are global, so `switch-workspace 3` targets workspace `3` wherever
 | `command raise-all-floating-windows` | — | shared | Raise all visible floating windows |
 | `command toggle-floating-focus` | — | shared | Toggle focus between the floating and tiled windows of the active workspace |
 | `command rescue-offscreen-windows` | — | shared | Clamp tracked floating windows back onto their visible monitors |
+| `command toggle-monitor-native-mode` | — | shared | Toggle native macOS mode, where every window floats, on the interaction monitor |
 | `command scratchpad assign <number>` | — | shared | Assign the focused window to scratchpad 1-10, or remove it when already there |
 | `command scratchpad toggle <number>` | — | shared | Show or hide the windows in scratchpad 1-10 |
 

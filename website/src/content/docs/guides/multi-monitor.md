@@ -38,6 +38,12 @@ Three settings shape how focus and windows travel between displays:
 - **Move Window Across Monitor at Edge** sends a window beyond a workspace edge to the adjacent routed display and always follows it. The dedicated `Move Window to Left / Right / Up / Down Monitor` actions work independently of this setting: they send the focused window directly to the current workspace on the adjacent routed display and do not wrap when no monitor exists in that direction.
 - **Follow Window to Monitor** controls whether focus follows ordinary window or column transfers to another workspace, including the dedicated monitor-move actions. When it is off, those transfers leave you in the source workspace; edge-crossing moves always follow.
 
+## Native macOS mode per display
+
+A display in native macOS mode is not tiled: every window on it floats and can be dragged and resized like on stock macOS. Displays start in native macOS mode; turn off **Native macOS Mode by Default** in **Settings > Displays** to tile them instead. Switch one display with **Toggle Native macOS Mode on Monitor** (`Option + Shift + N`, or `omniwmctl command toggle-monitor-native-mode`; both act on the display under interaction), the **NATIVE MACOS MODE** switches in the menu bar menu, or **Native macOS Mode** in **Settings > Displays**; that choice stays with the display whatever the default is.
+
+Windows carry their mode with the display they land on. A tiled window moved to a native display, by shortcut or by dragging, floats there: it keeps its position when it is already on that display and is centered otherwise. A window that native mode floated is tiled again when you move it to a tiling display or its display starts tiling; windows you floated yourself or that a rule floats stay floating. **Toggle Focused Window Floating** still works on a native display and tiles that one window there. See [`monitors.nativeMode` in the Settings Reference](/config/settings-reference/#monitors) for the configuration format.
+
 ## Monitor roles
 
 A workspace's home can be **Main**, **Secondary**, **Tertiary**, or a specific display. By default Main is the display with the macOS menu bar and Secondary and Tertiary are the next displays in arrangement order, which leaves you no say over which of two external displays plays which role.

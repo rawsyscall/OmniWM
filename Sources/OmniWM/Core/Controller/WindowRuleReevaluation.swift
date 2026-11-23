@@ -253,6 +253,7 @@ struct WindowRuleReevaluation {
     }
 
     private func updateGeometry(_ window: RuleReevaluationWindow, workspaceId: WorkspaceDescriptor.ID) {
+        controller.releaseNativeModeOwnership(of: window.token, ifBaselineFloats: window.evaluation.decision)
         if let oldMode = window.existingEntry?.mode, oldMode != window.mode {
             _ = controller.transitionWindowMode(
                 for: window.token,

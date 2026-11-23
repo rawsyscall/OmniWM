@@ -7942,6 +7942,7 @@ final class RuntimeArchitectureTests: XCTestCase {
             ),
             autosaveEnabled: false
         )
+        settings.monitors.nativeModeByDefault = false // These fixtures exercise tiling.
         return settings
     }
 }

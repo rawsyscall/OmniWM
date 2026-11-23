@@ -74,6 +74,7 @@ window-switcher
 raise-all-floating-windows
 toggle-floating-focus
 rescue-offscreen-windows
+toggle-monitor-native-mode
 toggle-focused-window-floating
 close-focused-window
 scratchpad-assign

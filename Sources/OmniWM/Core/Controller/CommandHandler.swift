@@ -93,6 +93,8 @@ final class CommandHandler {
             return controller.toggleFloatingFocus()
         case .rescueOffscreenWindows:
             _ = controller.rescueOffscreenWindows()
+        case .toggleMonitorNativeMode:
+            return controller.toggleNativeModeOnInteractionMonitor()
         case .windowState(.toggleFloating):
             return controller.toggleFocusedWindowFloating()
         case .windowState(.close):

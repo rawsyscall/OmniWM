@@ -30,6 +30,7 @@ extension LayoutRefreshController {
         if controller.isFrontmostAppLockScreen() || controller.isLockScreenActive {
             return false
         }
+        controller.syncNativeModeWindows()
 
         let currentBeforeBuild = refresh.postLayoutActions.map {
             $0.currentWorkspaces(using: controller.workspaceManager)

@@ -15,6 +15,7 @@ extension ActionCatalog {
         case .raiseAllFloatingWindows: .raiseAllFloatingWindows
         case .toggleFloatingFocus: .toggleFloatingFocus
         case .rescueOffscreenWindows: .rescueOffscreenWindows
+        case .toggleMonitorNativeMode: .toggleMonitorNativeMode
         case let .fullscreen(command): .fullscreen(command)
         case let .presentation(command): .presentation(command)
         case let .media(command): .media(command)

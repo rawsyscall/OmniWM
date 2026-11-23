@@ -10,6 +10,9 @@ struct SettingsExport: Equatable {
     var mouseWarp: MouseWarp
     var routing: Routing
     var monitorRanking: [OutputId]
+    var nativeModeByDefault = true
+    var nativeModeMonitors: [OutputId] = []
+    var tilingMonitors: [OutputId] = []
     var gaps: Gaps
 
     var niri: Niri

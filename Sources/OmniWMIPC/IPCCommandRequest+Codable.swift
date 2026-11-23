@@ -41,6 +41,7 @@ extension IPCCommandRequest: Codable {
              .raiseAllFloatingWindows,
              .toggleFloatingFocus,
              .rescueOffscreenWindows,
+             .toggleMonitorNativeMode,
              .fullscreen,
              .presentation,
              .media,

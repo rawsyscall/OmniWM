@@ -220,6 +220,24 @@ final class StatusMenuModel {
         return tiles
     }
 
+    var nativeModeRows: [NativeModeMonitorRow] {
+        guard let monitors = controller?.workspaceManager.monitors else { return [] }
+        let settings = settings
+        weak let controller = controller
+        let labels = MonitorSettingsTabModel.displayLabels(for: monitors)
+        return MonitorSettingsTabModel.sortedMonitors(monitors).map { monitor in
+            let label = labels[monitor.id]
+            return NativeModeMonitorRow(
+                id: monitor.id,
+                label: [label?.name ?? monitor.name, label?.badgeText].compactMap(\.self).joined(separator: " "),
+                isOn: Binding(
+                    get: { settings.monitors.isNativeMode(monitor) },
+                    set: { controller?.setNativeMode($0, for: monitor) }
+                )
+            )
+        }
+    }
+
     func openSettings(section: SettingsSection? = nil) {
         guard let controller else { return }
         SettingsWindowController.shared.show(
@@ -293,6 +311,12 @@ final class StatusMenuModel {
             Log.config.error("settings file action failed: \(error.localizedDescription)")
         }
     }
+}
+
+struct NativeModeMonitorRow: Identifiable {
+    let id: Monitor.ID
+    let label: String
+    let isOn: Binding<Bool>
 }
 
 extension StatusMenuModel {

@@ -51,5 +51,6 @@ extension AXEventHandler {
             toWorkspaceId: targetWorkspace.id,
             onMonitor: targetMonitor
         )
+        controller.syncNativeModeWindows()
     }
 }

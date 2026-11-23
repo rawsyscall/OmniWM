@@ -16,6 +16,7 @@ public enum IPCCommandName: RawRepresentable, Codable, CaseIterable, Hashable, S
     case raiseAllFloatingWindows
     case toggleFloatingFocus
     case rescueOffscreenWindows
+    case toggleMonitorNativeMode
     case workspaceLayout(IPCWorkspaceLayoutCommandName)
     case fullscreen(IPCFullscreenCommand)
     case presentation(IPCPresentationCommand)
@@ -57,6 +58,8 @@ public enum IPCCommandName: RawRepresentable, Codable, CaseIterable, Hashable, S
             "toggle-floating-focus"
         case .rescueOffscreenWindows:
             "rescue-offscreen-windows"
+        case .toggleMonitorNativeMode:
+            "toggle-monitor-native-mode"
         case let .workspaceLayout(name):
             name.rawValue
         case let .fullscreen(name):
@@ -96,6 +99,8 @@ public enum IPCCommandName: RawRepresentable, Codable, CaseIterable, Hashable, S
             self = .toggleFloatingFocus
         case "rescue-offscreen-windows":
             self = .rescueOffscreenWindows
+        case "toggle-monitor-native-mode":
+            self = .toggleMonitorNativeMode
         case "open-menu-anywhere":
             self = .openMenuAnywhere
         case "app-open":
@@ -138,6 +143,7 @@ public enum IPCCommandName: RawRepresentable, Codable, CaseIterable, Hashable, S
         names.append(.raiseAllFloatingWindows)
         names.append(.toggleFloatingFocus)
         names.append(.rescueOffscreenWindows)
+        names.append(.toggleMonitorNativeMode)
         names.append(contentsOf: IPCWorkspaceLayoutCommandName.allCases.map(Self.workspaceLayout))
         names.append(contentsOf: IPCFullscreenCommand.allCases.map(Self.fullscreen))
         names.append(contentsOf: IPCPresentationCommand.allCases.map(Self.presentation))

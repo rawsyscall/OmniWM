@@ -268,6 +268,19 @@ struct MonitorSettingsTab: View {
         }
         .id("Cross-Monitor Behavior")
 
+        Section("Native macOS Mode") {
+            Toggle("Native macOS Mode by Default", isOn: Binding(
+                get: { settings.monitors.nativeModeByDefault },
+                set: { controller.setNativeModeByDefault($0) }
+            ))
+            .id("Native macOS Mode by Default")
+
+            SettingsCaption(
+                localized: "Monitors without their own choice start in native macOS mode, where windows float freely. Turn it off to tile them by default."
+            )
+        }
+        .id("Native macOS Mode Section")
+
         Section("Monitor Orientation") {
             if let monitor = selectedConnectedMonitor,
                let displayLabel = displayLabels[monitor.id]
@@ -468,6 +481,16 @@ private struct SelectedMonitorDetails: View {
             Label(conflict.localizedDescription, systemImage: "exclamationmark.triangle.fill")
                 .foregroundStyle(.orange)
         }
+
+        Toggle("Native macOS Mode", isOn: Binding(
+            get: { settings.monitors.isNativeMode(monitor) },
+            set: { controller.setNativeMode($0, for: monitor) }
+        ))
+        .id("Native macOS Mode")
+
+        SettingsCaption(
+            localized: "Windows on this monitor float freely like stock macOS. Windows moved to a tiling monitor are tiled again."
+        )
     }
 
     private func updateOrientation(_ orientation: Monitor.Orientation?) {

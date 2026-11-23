@@ -583,6 +583,7 @@ final class WorkspaceBarActionsTests: XCTestCase {
             ),
             autosaveEnabled: false
         )
+        settings.monitors.nativeModeByDefault = false // These fixtures exercise tiling.
         settings.animationsEnabled = false
         settings.focus.followsWindowToMonitor = followsFocus
         settings.workspaces.defaultLayoutType = .niri

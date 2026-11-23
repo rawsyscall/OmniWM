@@ -187,6 +187,12 @@ enum SettingsSearchIndex {
             tab: "behavior",
             anchor: "Constrain Cursor to Arrangement"
         ),
+        setting(
+            "Native macOS Mode by Default",
+            section: .monitors,
+            tab: "behavior",
+            anchor: "Native macOS Mode by Default"
+        ),
         setting("Monitor Orientation", section: .monitors, tab: "behavior", anchor: "Monitor Orientation"),
         setting("Orientation Override", section: .monitors, tab: "behavior", anchor: "Orientation Override"),
         setting("Reset to Auto", section: .monitors, tab: "behavior", anchor: "Reset to Auto"),

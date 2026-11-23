@@ -419,6 +419,9 @@ extension SettingsStore {
         monitors.routingMode = export.routing.mode
         monitors.arrangements = export.routing.arrangements
         monitors.ranking = MonitorRanking.normalized(export.monitorRanking)
+        monitors.nativeModeByDefault = export.nativeModeByDefault
+        monitors.nativeModeOutputs = export.nativeModeMonitors
+        monitors.tilingOutputs = export.tilingMonitors
         gaps.apply(export.gaps)
 
         niri.apply(export.niri, baseline: SettingsStore.defaultExport.niri)

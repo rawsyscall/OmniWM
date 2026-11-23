@@ -34,6 +34,18 @@ final class MonitorConfigurationSettings {
         didSet { onChange?() }
     }
 
+    var nativeModeByDefault = true {
+        didSet { onChange?() }
+    }
+
+    var nativeModeOutputs: [OutputId] = [] {
+        didSet { onChange?() }
+    }
+
+    var tilingOutputs: [OutputId] = [] {
+        didSet { onChange?() }
+    }
+
     func export() -> SettingsExport.Routing {
         SettingsExport.Routing(
             mode: routingMode,
@@ -60,6 +72,22 @@ final class MonitorConfigurationSettings {
 
     func removeOrientationSettings(for monitor: Monitor) {
         MonitorSettingsStore.remove(for: monitor, from: &orientationOverrides)
+    }
+
+    /// A monitor's own choice wins; monitors without one follow `nativeModeByDefault`.
+    func isNativeMode(_ monitor: Monitor) -> Bool {
+        let output = OutputId(from: monitor)
+        if nativeModeOutputs.contains(output) { return true }
+        if tilingOutputs.contains(output) { return false }
+        return nativeModeByDefault
+    }
+
+    func setNativeMode(_ enabled: Bool, for monitor: Monitor) {
+        let output = OutputId(from: monitor)
+        let native = nativeModeOutputs.filter { $0 != output } + (enabled ? [output] : [])
+        let tiling = tilingOutputs.filter { $0 != output } + (enabled ? [] : [output])
+        if native != nativeModeOutputs { nativeModeOutputs = native }
+        if tiling != tilingOutputs { tilingOutputs = tiling }
     }
 
     func storeRoutingLayout(_ layout: [MonitorRoutingSettings], for monitors: [Monitor]) {

@@ -1345,6 +1345,7 @@ final class CrossDisplayDragTests: XCTestCase {
             ),
             autosaveEnabled: false
         )
+        settings.monitors.nativeModeByDefault = false // These fixtures exercise tiling.
         settings.animationsEnabled = false
         for index in monitors.indices where index == 0 || orientations != nil {
             settings.monitors.updateOrientationSettings(

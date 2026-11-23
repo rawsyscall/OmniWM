@@ -421,6 +421,7 @@ final class OverviewDwindleProjectionTests: XCTestCase {
             ),
             autosaveEnabled: false
         )
+        settings.monitors.nativeModeByDefault = false // These fixtures exercise tiling.
         settings.animationsEnabled = false
         let reads = Reads()
         let controller = WMController(

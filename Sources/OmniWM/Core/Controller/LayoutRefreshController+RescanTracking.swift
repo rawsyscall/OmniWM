@@ -73,6 +73,7 @@ extension LayoutRefreshController {
         else {
             return
         }
+        controller.releaseNativeModeOwnership(of: admittedToken, ifBaselineFloats: window.decision.evaluation.decision)
         let candidate = window.candidate
         let oldMode = admission.refreshedEntry?.mode
         let wsForWindow = admission.assignment.workspaceId

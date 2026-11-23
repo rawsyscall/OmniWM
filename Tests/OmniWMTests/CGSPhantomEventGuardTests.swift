@@ -698,6 +698,7 @@ final class CGSPhantomEventGuardTests: XCTestCase {
             ),
             autosaveEnabled: false
         )
+        settings.monitors.nativeModeByDefault = false // These fixtures exercise tiling.
         let controller = WMController(
             settings: settings,
             windowFocusOperations: WindowFocusOperations(

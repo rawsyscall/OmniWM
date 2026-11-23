@@ -60,6 +60,7 @@ enum HotkeyCommand: Equatable, Hashable {
     case raiseAllFloatingWindows
     case toggleFloatingFocus
     case rescueOffscreenWindows
+    case toggleMonitorNativeMode
     case windowState(IPCWindowStateCommand)
 
     case openMenuAnywhere

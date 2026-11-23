@@ -191,6 +191,13 @@ struct StatusMenuPrimaryView: View {
                 }
                 MenuDivider()
             }
+            if !model.nativeModeRows.isEmpty {
+                MenuSectionLabel(text: String(localized: "NATIVE MACOS MODE"))
+                ForEach(model.nativeModeRows) { row in
+                    MenuToggleRow(icon: "macwindow.on.rectangle", label: row.label, isOn: row.isOn)
+                }
+                MenuDivider()
+            }
             if model.hasVisiblePrimaryRows {
                 if model.canShowHiddenIcons, model.isMenuItemVisible(.hiddenIcons) {
                     MenuActionRow(

@@ -683,6 +683,7 @@ final class ActiveLayoutRoutingTests: XCTestCase {
             ),
             autosaveEnabled: false
         )
+        settings.monitors.nativeModeByDefault = false // These fixtures exercise tiling.
         return WMController(
             settings: settings,
             windowFocusOperations: WindowFocusOperations(

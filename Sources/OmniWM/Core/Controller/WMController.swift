@@ -109,6 +109,9 @@ final class WMController {
     private var runtimeFrameJobCancellationSuppressionDepth: Int = 0
     @ObservationIgnored
     let floatDemotionTracker = FloatDemotionTracker()
+    /// Windows this controller floated because their monitor is in native mode; they retile when leaving it.
+    @ObservationIgnored
+    var nativeModeFloatedTokens: Set<WindowToken> = []
     @ObservationIgnored
     var hiddenWorkspaceBarMonitorIds: Set<Monitor.ID> = []
     @ObservationIgnored

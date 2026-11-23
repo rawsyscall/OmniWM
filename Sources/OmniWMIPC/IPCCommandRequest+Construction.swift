@@ -36,6 +36,8 @@ extension IPCCommandRequest {
             self = try arguments.requireNoArguments(.toggleFloatingFocus)
         case .rescueOffscreenWindows:
             self = try arguments.requireNoArguments(.rescueOffscreenWindows)
+        case .toggleMonitorNativeMode:
+            self = try arguments.requireNoArguments(.toggleMonitorNativeMode)
         case let .workspaceLayout(name):
             self = try .workspaceLayout(IPCWorkspaceLayoutCommand(name: name, arguments: arguments))
         case let .fullscreen(name):

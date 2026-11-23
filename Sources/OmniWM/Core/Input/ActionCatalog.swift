@@ -243,6 +243,7 @@ enum ActionCatalog {
              .raiseAllFloatingWindows,
              .toggleFloatingFocus,
              .rescueOffscreenWindows,
+             .toggleMonitorNativeMode,
              .windowState,
              .openMenuAnywhere,
              .windowMark,
@@ -292,6 +293,10 @@ enum ActionCatalog {
             )
         case .rescueOffscreenWindows: LocalizedStringResource(
                 "command.floating.rescueOffscreen", defaultValue: "Rescue Off-Screen Floating Windows",
+                table: "Commands", bundle: .omniWM
+            )
+        case .toggleMonitorNativeMode: LocalizedStringResource(
+                "command.monitor.toggleNativeMode", defaultValue: "Toggle Native macOS Mode on Monitor",
                 table: "Commands", bundle: .omniWM
             )
         case let .windowState(command): command.actionDisplayName()

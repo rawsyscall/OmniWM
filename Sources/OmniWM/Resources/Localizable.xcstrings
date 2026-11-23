@@ -1,6 +1,626 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Native macOS Mode by Default" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "وضع macOS الأصلي افتراضيًا"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Native macOS-tilstand som standard"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nativer macOS-Modus als Standard"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Εγγενής λειτουργία macOS από προεπιλογή"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modo nativo de macOS por defecto"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOSin natiivitila oletuksena"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode macOS natif par défaut"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "מצב macOS מקורי כברירת מחדל"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "डिफ़ॉल्ट रूप से नेटिव macOS मोड"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modalità macOS nativa predefinita"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "デフォルトでネイティブmacOSモード"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본값으로 기본 macOS 모드 사용"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Innebygd macOS-modus som standard"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standaard native macOS-modus"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domyślnie natywny tryb macOS"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нативный режим macOS по умолчанию"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izvorni macOS režim kao podrazumevani"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inbyggt macOS-läge som standard"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нативний режим macOS за замовчуванням"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "默认使用原生 macOS 模式"
+          }
+        }
+      }
+    },
+    "Monitors without their own choice start in native macOS mode, where windows float freely. Turn it off to tile them by default." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تبدأ الشاشات التي لم يُحدَّد لها وضع خاص في وضع macOS الأصلي، حيث تطفو النوافذ بحرية. أوقفه لترتيبها بالتجانب افتراضيًا."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skærme uden eget valg starter i native macOS-tilstand, hvor vinduer flyder frit. Slå det fra for at lægge dem i fliser som standard."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitore ohne eigene Auswahl starten im nativen macOS-Modus, in dem Fenster frei schweben. Schalte es aus, um sie standardmäßig zu kacheln."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Οι οθόνες χωρίς δική τους επιλογή ξεκινούν σε εγγενή λειτουργία macOS, όπου τα παράθυρα αιωρούνται ελεύθερα. Απενεργοποιήστε το για παράθεση από προεπιλογή."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los monitores sin una elección propia empiezan en el modo nativo de macOS, donde las ventanas flotan libremente. Desactívalo para colocarlos en mosaico por defecto."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitorit, joille ei ole valittu tilaa, käynnistyvät macOSin natiivitilassa, jossa ikkunat kelluvat vapaasti. Poista käytöstä, jos haluat laatoittaa ne oletuksena."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les moniteurs sans choix propre démarrent en mode macOS natif, où les fenêtres flottent librement. Désactivez-le pour les disposer en mosaïque par défaut."
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "צגים ללא בחירה משלהם מתחילים במצב macOS מקורי, שבו חלונות צפים בחופשיות. כבו כדי לרצף אותם כברירת מחדל."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जिन मॉनिटर के लिए अलग विकल्प नहीं चुना गया, वे नेटिव macOS मोड में शुरू होते हैं, जहाँ विंडो स्वतंत्र रूप से फ्लोट करती हैं। उन्हें डिफ़ॉल्ट रूप से टाइल करने के लिए इसे बंद करें।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I monitor senza una scelta propria partono in modalità macOS nativa, dove le finestre fluttuano liberamente. Disattivala per affiancarle per impostazione predefinita."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "個別に設定していないモニターは、ウィンドウが自由にフローティングするネイティブmacOSモードで始まります。オフにするとデフォルトでタイル表示します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "별도로 선택하지 않은 모니터는 창이 자유롭게 떠 있는 기본 macOS 모드로 시작합니다. 끄면 기본적으로 타일로 배치합니다."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skjermer uten eget valg starter i innebygd macOS-modus, der vinduer flyter fritt. Slå det av for å flislegge dem som standard."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitors zonder eigen keuze starten in de native macOS-modus, waarin vensters vrij zweven. Schakel dit uit om ze standaard te tegelen."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitory bez własnego wyboru startują w natywnym trybie macOS, w którym okna swobodnie pływają. Wyłącz, aby domyślnie układać je w kafelki."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мониторы без собственного выбора запускаются в нативном режиме macOS, где окна свободно плавают. Выключите, чтобы по умолчанию раскладывать их плиткой."
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitori bez sopstvenog izbora počinju u izvornom macOS režimu, gde prozori slobodno plutaju. Isključite da biste ih podrazumevano popločavali."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitorer utan eget val startar i inbyggt macOS-läge, där fönster flyter fritt. Stäng av för att ordna dem sida vid sida som standard."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дисплеї без власного вибору запускаються в нативному режимі macOS, де вікна вільно плавають. Вимкніть, щоб за замовчуванням розкладати їх плиткою."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未单独设置的显示器以原生 macOS 模式启动，窗口可自由浮动。关闭后默认平铺。"
+          }
+        }
+      }
+    },
+    "NATIVE MACOS MODE" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "وضع macOS الأصلي"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NATIVE MACOS-TILSTAND"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NATIVER MACOS-MODUS"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ΕΓΓΕΝΗΣ ΛΕΙΤΟΥΡΓΙΑ MACOS"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MODO NATIVO DE MACOS"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MACOSIN NATIIVITILA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MODE MACOS NATIF"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "מצב macOS מקורי"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नेटिव macOS मोड"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MODALITÀ MACOS NATIVA"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ネイティブmacOSモード"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본 macOS 모드"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "INNEBYGD MACOS-MODUS"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NATIVE MACOS-MODUS"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NATYWNY TRYB MACOS"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "НАТИВНЫЙ РЕЖИМ MACOS"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IZVORNI MACOS REŽIM"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "INBYGGT MACOS-LÄGE"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "НАТИВНИЙ РЕЖИМ MACOS"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "原生 macOS 模式"
+          }
+        }
+      }
+    },
+    "Native macOS Mode" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "وضع macOS الأصلي"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Native macOS-tilstand"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nativer macOS-Modus"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Εγγενής λειτουργία macOS"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modo nativo de macOS"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOSin natiivitila"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode macOS natif"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "מצב macOS מקורי"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नेटिव macOS मोड"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modalità macOS nativa"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ネイティブmacOSモード"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본 macOS 모드"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Innebygd macOS-modus"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Native macOS-modus"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Natywny tryb macOS"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нативный режим macOS"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izvorni macOS režim"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inbyggt macOS-läge"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нативний режим macOS"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "原生 macOS 模式"
+          }
+        }
+      }
+    },
+    "Windows on this monitor float freely like stock macOS. Windows moved to a tiling monitor are tiled again." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تطفو النوافذ على هذه الشاشة بحرية كما في macOS العادي. وتُرتَّب النوافذ المنقولة إلى شاشة بنظام التجانب بالتجانب مجددًا."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vinduer på denne skærm flyder frit som i standard-macOS. Vinduer, der flyttes til en skærm med fliselayout, lægges i fliser igen."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fenster auf diesem Monitor schweben frei wie im normalen macOS. Fenster, die auf einen kachelnden Monitor verschoben werden, werden wieder gekachelt."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Τα παράθυρα σε αυτή την οθόνη αιωρούνται ελεύθερα όπως στο κανονικό macOS. Τα παράθυρα που μετακινούνται σε οθόνη με παράθεση τοποθετούνται ξανά σε παράθεση."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las ventanas de este monitor flotan libremente como en macOS estándar. Las ventanas que se mueven a un monitor en mosaico vuelven a colocarse en mosaico."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tämän monitorin ikkunat kelluvat vapaasti kuten tavallisessa macOSissa. Laatoittavalle monitorille siirretyt ikkunat laatoitetaan uudelleen."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les fenêtres de ce moniteur flottent librement comme dans macOS standard. Les fenêtres déplacées vers un moniteur en mosaïque sont de nouveau disposées en mosaïque."
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "חלונות בצג זה צפים בחופשיות כמו ב-macOS הרגיל. חלונות שמועברים לצג עם ריצוף מרוצפים שוב."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इस मॉनिटर पर विंडो सामान्य macOS की तरह स्वतंत्र रूप से फ्लोट करती हैं। टाइलिंग मॉनिटर पर ले जाई गई विंडो फिर से टाइल की जाती हैं।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le finestre su questo monitor fluttuano liberamente come in macOS standard. Le finestre spostate su un monitor affiancato tornano affiancate."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このモニターのウィンドウは標準のmacOSと同じように自由にフローティングします。タイル表示のモニターに移動したウィンドウは再びタイル表示されます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 모니터의 창은 기본 macOS처럼 자유롭게 떠 있습니다. 타일링 모니터로 옮긴 창은 다시 타일로 배치됩니다."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vinduer på denne skjermen flyter fritt som i vanlig macOS. Vinduer som flyttes til en flisleggende skjerm, flislegges igjen."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vensters op deze monitor zweven vrij zoals in standaard-macOS. Vensters die naar een tegelende monitor worden verplaatst, worden weer getegeld."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Okna na tym monitorze swobodnie pływają jak w standardowym macOS. Okna przeniesione na monitor z kafelkowaniem są ponownie układane w kafelki."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Окна на этом мониторе свободно плавают, как в обычной macOS. Окна, перенесённые на монитор с тайлингом, снова раскладываются плиткой."
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prozori na ovom monitoru slobodno plutaju kao u standardnom macOS-u. Prozori premešteni na monitor sa popločavanjem ponovo se popločavaju."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fönster på den här monitorn flyter fritt som i vanliga macOS. Fönster som flyttas till en monitor med sida vid sida-layout ordnas sida vid sida igen."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вікна на цьому дисплеї вільно плавають, як у звичайній macOS. Вікна, перенесені на дисплей із тайлінгом, знову розкладаються плиткою."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此显示器上的窗口像原生 macOS 一样自由浮动。移到平铺显示器的窗口会重新平铺。"
+          }
+        }
+      }
+    },
     "Apply to Every New Matching Window" : {
 
     },

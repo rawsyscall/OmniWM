@@ -69,6 +69,7 @@ public enum IPCCommandRequest: Equatable, Sendable {
     case raiseAllFloatingWindows
     case toggleFloatingFocus
     case rescueOffscreenWindows
+    case toggleMonitorNativeMode
     case workspaceLayout(IPCWorkspaceLayoutCommand)
     case fullscreen(IPCFullscreenCommand)
     case presentation(IPCPresentationCommand)
@@ -110,6 +111,8 @@ public enum IPCCommandRequest: Equatable, Sendable {
             .toggleFloatingFocus
         case .rescueOffscreenWindows:
             .rescueOffscreenWindows
+        case .toggleMonitorNativeMode:
+            .toggleMonitorNativeMode
         case let .workspaceLayout(command):
             .workspaceLayout(command.name)
         case let .fullscreen(command):
