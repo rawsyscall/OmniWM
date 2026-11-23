@@ -421,3 +421,33 @@ struct MenuToggleRow: View {
         .animation(motionPolicy.animationsEnabled ? .easeOut(duration: 0.14) : nil, value: isOn)
     }
 }
+
+struct MenuMonitorModeRow: View {
+    let label: String
+    @Binding var mode: MonitorMode
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "display")
+                .font(.system(size: 12))
+                .foregroundStyle(Color(nsColor: .secondaryLabelColor))
+                .frame(width: 16)
+            Text(label)
+                .font(.system(size: 13))
+                .lineLimit(1)
+                .truncationMode(.tail)
+            Spacer(minLength: 6)
+            Picker(label, selection: $mode) {
+                ForEach(MonitorMode.allCases) { mode in
+                    Text(verbatim: mode.title).tag(mode)
+                }
+            }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .controlSize(.small)
+            .fixedSize()
+        }
+        .padding(.horizontal, 12)
+        .frame(height: 30)
+    }
+}

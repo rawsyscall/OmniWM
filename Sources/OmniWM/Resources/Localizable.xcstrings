@@ -249,126 +249,126 @@
         }
       }
     },
-    "NATIVE MACOS MODE" : {
+    "LAYOUT" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "وضع macOS الأصلي"
+            "value" : "التخطيط"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NATIVE MACOS-TILSTAND"
+            "value" : "LAYOUT"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NATIVER MACOS-MODUS"
+            "value" : "LAYOUT"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ΕΓΓΕΝΗΣ ΛΕΙΤΟΥΡΓΙΑ MACOS"
+            "value" : "ΔΙΆΤΑΞΗ"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MODO NATIVO DE MACOS"
+            "value" : "DISEÑO"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MACOSIN NATIIVITILA"
+            "value" : "ASETTELU"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MODE MACOS NATIF"
+            "value" : "DISPOSITION"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "מצב macOS מקורי"
+            "value" : "פריסה"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "नेटिव macOS मोड"
+            "value" : "लेआउट"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MODALITÀ MACOS NATIVA"
+            "value" : "DISPOSIZIONE"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ネイティブmacOSモード"
+            "value" : "レイアウト"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "기본 macOS 모드"
+            "value" : "레이아웃"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "INNEBYGD MACOS-MODUS"
+            "value" : "OPPSETT"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NATIVE MACOS-MODUS"
+            "value" : "INDELING"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NATYWNY TRYB MACOS"
+            "value" : "UKŁAD"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "НАТИВНЫЙ РЕЖИМ MACOS"
+            "value" : "РАСКЛАДКА"
           }
         },
         "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "IZVORNI MACOS REŽIM"
+            "value" : "RASPORED"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "INBYGGT MACOS-LÄGE"
+            "value" : "LAYOUT"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "НАТИВНИЙ РЕЖИМ MACOS"
+            "value" : "РОЗТАШУВАННЯ"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "原生 macOS 模式"
+            "value" : "布局"
           }
         }
       }

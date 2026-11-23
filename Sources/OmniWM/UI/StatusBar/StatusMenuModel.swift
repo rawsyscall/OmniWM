@@ -220,19 +220,31 @@ final class StatusMenuModel {
         return tiles
     }
 
-    var nativeModeRows: [NativeModeMonitorRow] {
+    var monitorModeRows: [MonitorModeRow] {
         guard let monitors = controller?.workspaceManager.monitors else { return [] }
         let settings = settings
         weak let controller = controller
         let labels = MonitorSettingsTabModel.displayLabels(for: monitors)
         return MonitorSettingsTabModel.sortedMonitors(monitors).map { monitor in
             let label = labels[monitor.id]
-            return NativeModeMonitorRow(
+            return MonitorModeRow(
                 id: monitor.id,
                 label: [label?.name ?? monitor.name, label?.badgeText].compactMap(\.self).joined(separator: " "),
-                isOn: Binding(
-                    get: { settings.monitors.isNativeMode(monitor) },
-                    set: { controller?.setNativeMode($0, for: monitor) }
+                mode: Binding(
+                    get: {
+                        guard !settings.monitors.isNativeMode(monitor) else { return .native }
+                        let workspace = controller?.workspaceManager.activeWorkspace(on: monitor.id)
+                        return workspace.map { settings.workspaces.layoutType(for: $0.name) } == .dwindle
+                            ? .dwindle : .niri
+                    },
+                    set: { mode in
+                        guard let controller else { return }
+                        controller.setNativeMode(mode == .native, for: monitor)
+                        guard let layout = mode.layoutType,
+                              let workspace = controller.workspaceManager.activeWorkspace(on: monitor.id)
+                        else { return }
+                        controller.commandHandler.setWorkspaceLayout(layout, forWorkspaceNamed: workspace.name)
+                    }
                 )
             )
         }
@@ -313,10 +325,37 @@ final class StatusMenuModel {
     }
 }
 
-struct NativeModeMonitorRow: Identifiable {
+/// What a display runs: the native macOS mode, or one of the tiling layouts on its visible workspace.
+enum MonitorMode: CaseIterable, Identifiable {
+    case native
+    case niri
+    case dwindle
+
+    var id: Self {
+        self
+    }
+
+    var title: String {
+        switch self {
+        case .native: "macOS"
+        case .niri: "Niri"
+        case .dwindle: "Dwindle"
+        }
+    }
+
+    var layoutType: LayoutType? {
+        switch self {
+        case .native: nil
+        case .niri: .niri
+        case .dwindle: .dwindle
+        }
+    }
+}
+
+struct MonitorModeRow: Identifiable {
     let id: Monitor.ID
     let label: String
-    let isOn: Binding<Bool>
+    let mode: Binding<MonitorMode>
 }
 
 extension StatusMenuModel {
