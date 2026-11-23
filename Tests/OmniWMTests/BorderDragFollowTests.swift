@@ -20,6 +20,7 @@ final class BorderDragFollowTests: XCTestCase {
 
         bounds.frame.origin = CGPoint(x: 140, y: 90)
         reconciler.noteBorderWindowFrameChanged(token)
+        bounds.frame.origin = CGPoint(x: 180, y: 70)
         reconciler.noteBorderPointerDragged(to: CGPoint(x: 300, y: 350), button: .left)
         XCTAssertEqual(reconciler.borderDragFrame(for: token), CGRect(x: 200, y: 60, width: 400, height: 300))
 
@@ -39,6 +40,7 @@ final class BorderDragFollowTests: XCTestCase {
         reconciler.noteBorderPointerDragged(to: CGPoint(x: 240, y: 380), button: .left)
         bounds.frame.origin = CGPoint(x: 139, y: 91)
         reconciler.noteBorderWindowFrameChanged(token)
+        bounds.frame.origin = CGPoint(x: 180, y: 70)
         reconciler.noteBorderPointerDragged(to: CGPoint(x: 300, y: 350), button: .left)
 
         XCTAssertEqual(reconciler.borderDragFrame(for: token), CGRect(x: 199, y: 61, width: 400, height: 300))
@@ -56,12 +58,30 @@ final class BorderDragFollowTests: XCTestCase {
         reconciler.noteBorderWindowFrameChanged(token)
         XCTAssertNotNil(reconciler.borderDragFrame(for: token))
 
-        reconciler.noteBorderPointerDragged(to: CGPoint(x: 240, y: 340), button: .left)
+        reconciler.noteBorderPointerDragged(to: CGPoint(x: 240, y: 355), button: .left)
         bounds.frame.origin.x += 1
         reconciler.noteBorderWindowFrameChanged(token)
         XCTAssertNotNil(reconciler.borderDragFrame(for: token), "one stray report is lag, not a held window")
         bounds.frame.origin.x += 1
         reconciler.noteBorderWindowFrameChanged(token)
+
+        XCTAssertNil(reconciler.borderDragFrame(for: token))
+    }
+
+    func testPointerCannotCarryTheBorderAwayFromAWindowThatStopped() throws {
+        let (controller, token) = try makeFocusedWindow(mode: .floating)
+        let reconciler = controller.surfaceReconciler
+        let bounds = BoundsBox()
+        reconciler.borderDragBounds = { _, _ in bounds.frame }
+
+        reconciler.noteBorderPointerPressed(button: .left, at: CGPoint(x: 200, y: 390), windowIdUnderPointer: nil)
+        reconciler.noteBorderPointerDragged(to: CGPoint(x: 240, y: 390), button: .left)
+        bounds.frame.origin.x += 40
+        reconciler.noteBorderWindowFrameChanged(token)
+        reconciler.noteBorderPointerDragged(to: CGPoint(x: 270, y: 390), button: .left)
+        XCTAssertNotNil(reconciler.borderDragFrame(for: token), "a frame of lag stays carried")
+
+        reconciler.noteBorderPointerDragged(to: CGPoint(x: 440, y: 390), button: .left)
 
         XCTAssertNil(reconciler.borderDragFrame(for: token))
     }

@@ -41,7 +41,17 @@ extension SurfaceReconciler {
     func noteBorderPointerDragged(to location: CGPoint, button: MouseEventHandler.MouseButton) {
         guard borderDrag.button == button else { return }
         borderDrag.pointer = location
-        if borderDrag.isFollowingPointer { reconcileBorderNow() }
+        guard borderDrag.isFollowingPointer, let controller, let windowId = borderDrag.windowId,
+              let token = controller.workspaceManager.borderFocusToken, token.windowId == windowId
+        else { return }
+        // A window that stopped sends no more move reports, so the pointer alone could pull the border away.
+        if let predicted = borderDragFrame(for: token), let frame = borderDragBounds(controller, windowId),
+           abs(frame.minX - predicted.minX) > 48 || abs(frame.minY - predicted.minY) > 48
+        {
+            borderDrag.isFollowingPointer = false
+            borderDrag.gaveUp = true
+        }
+        reconcileBorderNow()
     }
 
     func noteBorderPointerReleased(button: MouseEventHandler.MouseButton) {
