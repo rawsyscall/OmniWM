@@ -73,6 +73,7 @@ extension MouseEventHandler {
     }
 
     func handleInputSuppressionBegan() {
+        controller?.surfaceReconciler.cancelBorderDrag()
         state.latestFocusFollowsMouseSample = nil
         clearNativeTitleBarDrag()
         cancelActiveMouseInteraction()

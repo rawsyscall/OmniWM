@@ -85,13 +85,17 @@ extension MouseEventHandler {
         }
         guard controller != nil, !isCarryingWindowByGesture else { return false }
         controller?.noteUserAction()
-        controller?.surfaceReconciler.noteBorderPointerPressed()
         if button == .left {
             state.leftPressLocation = location
             state.leftPressModifiers = modifiers
             state.leftPressWasDragged = false
         }
         let blocked = shouldBlockOwnWindowInput(at: location, windowIdUnderPointer: windowIdUnderPointer)
+        if !blocked {
+            controller?.surfaceReconciler.noteBorderPointerPressed(
+                button: button, at: location, windowIdUnderPointer: windowIdUnderPointer
+            )
+        }
         if MouseTrace.shared.isActive {
             let geometric = controller?.ownedWindowRegistry.containsGeometric(point: location) ?? false
             MouseTrace.record(
@@ -136,7 +140,7 @@ extension MouseEventHandler {
     }
 
     func dispatchMouseUp(at location: CGPoint, button: MouseButton = .left) {
-        controller?.surfaceReconciler.noteBorderPointerReleased()
+        controller?.surfaceReconciler.noteBorderPointerReleased(button: button)
         if button == .left, !isCarryingWindowByGesture {
             releaseEdgeResizeHold()
         }

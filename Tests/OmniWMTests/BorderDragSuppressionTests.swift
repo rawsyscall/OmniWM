@@ -8,7 +8,7 @@ import XCTest
 
 @MainActor
 final class BorderDragSuppressionTests: XCTestCase {
-    func testFloatingBorderHidesOnlyWhileAPressDragsItsWindow() throws {
+    func testFloatingBorderHidesOnlyWhileAPressOnItsWindowDragsIt() throws {
         let (controller, token) = try makeFocusedWindow(mode: .floating)
         let reconciler = controller.surfaceReconciler
         let bounds = BoundsBox()
@@ -18,7 +18,7 @@ final class BorderDragSuppressionTests: XCTestCase {
         reconciler.noteBorderWindowFrameChanged(token)
         XCTAssertNil(reconciler.borderDrag.hiddenToken, "a move without a press is followed, not hidden")
 
-        reconciler.noteBorderPointerPressed()
+        reconciler.noteBorderPointerPressed(button: .left, at: bounds.frame.center, windowIdUnderPointer: nil)
         reconciler.noteBorderWindowFrameChanged(token)
         XCTAssertNil(reconciler.borderDrag.hiddenToken, "a click that moves nothing keeps the border")
 
@@ -27,8 +27,26 @@ final class BorderDragSuppressionTests: XCTestCase {
         XCTAssertEqual(reconciler.borderDrag.hiddenToken, token)
         XCTAssertEqual(WorldView(controller: controller).borderHiddenForDragToken, token)
 
-        reconciler.noteBorderPointerReleased()
+        reconciler.noteBorderPointerReleased(button: .right)
+        XCTAssertEqual(reconciler.borderDrag.hiddenToken, token, "another button's release does not end the drag")
+        reconciler.noteBorderPointerReleased(button: .left)
         XCTAssertNil(reconciler.borderDrag.hiddenToken)
+    }
+
+    func testProgrammaticMoveDuringAnUnrelatedHeldClickKeepsTheBorder() throws {
+        let (controller, token) = try makeFocusedWindow(mode: .floating)
+        let reconciler = controller.surfaceReconciler
+        let bounds = BoundsBox()
+        reconciler.borderDragBounds = { _, _ in bounds.frame }
+
+        reconciler.noteBorderPointerPressed(button: .left, at: CGPoint(x: 1200, y: 800), windowIdUnderPointer: nil)
+        bounds.frame.origin.x += 40
+        reconciler.noteBorderWindowFrameChanged(token)
+        bounds.frame.origin.x += 40
+        reconciler.noteBorderWindowFrameChanged(token)
+
+        XCTAssertNil(reconciler.borderDrag.hiddenToken)
+        XCTAssertNil(WorldView(controller: controller).borderHiddenForDragToken)
     }
 
     func testTiledWindowDragKeepsItsBorder() throws {
@@ -37,7 +55,7 @@ final class BorderDragSuppressionTests: XCTestCase {
         let bounds = BoundsBox()
         reconciler.borderDragBounds = { _, _ in bounds.frame }
 
-        reconciler.noteBorderPointerPressed()
+        reconciler.noteBorderPointerPressed(button: .left, at: bounds.frame.center, windowIdUnderPointer: nil)
         bounds.frame.origin.x += 40
         reconciler.noteBorderWindowFrameChanged(token)
 
@@ -50,6 +68,9 @@ final class BorderDragSuppressionTests: XCTestCase {
 
     private func makeFocusedWindow(mode: TrackedWindowMode) throws -> (WMController, WindowToken) {
         let controller = WindowAdmissionTestSupport.controller(prefix: "OmniWMBorderDragSuppressionTests")
+        controller.mouseEventHandler.pressedMouseButtonsProvider = {
+            MouseEventHandler.MouseButton.left.pressedMask | MouseEventHandler.MouseButton.right.pressedMask
+        }
         addTeardownBlock { @MainActor in
             controller.layoutRefreshController.resetState()
             controller.surfaceReconciler.cleanupBorder()
