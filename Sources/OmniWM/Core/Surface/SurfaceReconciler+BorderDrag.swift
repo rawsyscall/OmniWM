@@ -12,6 +12,8 @@ struct BorderDragState: Equatable {
     var windowId: Int?
     var pressFrame: CGRect?
     var pointer: CGPoint?
+    /// The window server's latest bounds for the carried window.
+    var lastFrame: CGRect?
     /// Set once the window server shows the window moving with the pointer, not resizing or sitting still.
     var isFollowingPointer = false
     /// Window-server reports in a row that disagreed with the pointer; two end following for this drag.
@@ -45,7 +47,9 @@ extension SurfaceReconciler {
               let token = controller.workspaceManager.borderFocusToken, token.windowId == windowId
         else { return }
         // A window that stopped sends no more move reports, so the pointer alone could pull the border away.
-        if let predicted = borderDragFrame(for: token), let frame = borderDragBounds(controller, windowId),
+        let frame = borderDragBounds(controller, windowId)
+        if let frame { borderDrag.lastFrame = frame }
+        if let predicted = borderDragFrame(for: token), let frame,
            abs(frame.minX - predicted.minX) > 48 || abs(frame.minY - predicted.minY) > 48
         {
             borderDrag.isFollowingPointer = false
@@ -72,9 +76,11 @@ extension SurfaceReconciler {
         else { return nil }
         let pointer = borderDrag.pointer ?? start
         var frame = pressFrame.offsetBy(dx: pointer.x - start.x, dy: pointer.y - start.y)
-        // The window server keeps a dragged title bar below the menu bar of the display under the pointer.
+        // The window server stops a title bar from rising under the menu bar of the display under the pointer,
+        // but leaves one that comes down from a display above where it is.
         if let screen = NSScreen.screens.first(where: { $0.frame.contains(pointer) }),
-           frame.maxY > screen.visibleFrame.maxY
+           frame.maxY > screen.visibleFrame.maxY,
+           (borderDrag.lastFrame ?? pressFrame).maxY <= screen.visibleFrame.maxY + 1
         {
             frame.origin.y = screen.visibleFrame.maxY - frame.height
         }
@@ -97,6 +103,7 @@ extension SurfaceReconciler {
                 } else if borderDrag.windowId == token.windowId, !borderDrag.gaveUp,
                           let pressFrame = borderDrag.pressFrame
                 {
+                    borderDrag.lastFrame = frame
                     noteCarriedWindowFrame(frame, pressFrame: pressFrame, token: token)
                 }
             }
